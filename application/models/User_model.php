@@ -35,9 +35,9 @@ class User_model extends CI_Model
         $this->db->from('users');
         $this->db->where(array(
             'username' => $username,
-            'password' => sha1($password)
+            'password' => SHA1($password)
         ));
-        $this->db->order_by('iduser', 'asc');
+        $this->db->order_by('iduser', 'desc');
         $query = $this->db->get();
         return $query->row();
     }

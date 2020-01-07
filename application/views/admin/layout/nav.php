@@ -18,6 +18,37 @@
             <p>Dashboard</p>
           </a>
         </li>
+        <!-- menu Produk-->
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class=" nav-icon fas fa-sitemap"></i>
+            <p>
+              Obat
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="<?= base_url('admin/obat') ?>" class="nav-link">
+                <i class="fas fa-table nav-icon"></i>
+                <p>Data Obat</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?= base_url('admin/obat/tambah') ?>" class="nav-link">
+                <i class="fas fa-plus nav-icon"></i>
+                <p>Tambah Obat</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?= base_url('admin/kategori') ?>" class="nav-link">
+                <i class="fas fa-tags nav-icon"></i>
+                <p>Kategori Obat</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <!-- akhir menu Produk -->
         <!-- menu user -->
         <li class="nav-item has-treeview">
           <a href="#" class="nav-link">
@@ -42,6 +73,7 @@
             </li>
           </ul>
         </li>
+        <!-- akhir menu pengguna -->
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

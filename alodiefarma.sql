@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 29, 2019 at 07:28 AM
+-- Generation Time: Jan 07, 2020 at 01:20 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.2.12
 
@@ -69,6 +69,18 @@ CREATE TABLE `kategori` (
   `urutan` int(11) DEFAULT NULL,
   `tglupdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `kategori`
+--
+
+INSERT INTO `kategori` (`idkategori`, `namaktegori`, `urutan`, `tglupdate`) VALUES
+(1, 'Kapsul', 1, '2020-01-06 13:42:29'),
+(2, 'Tablet', 2, '2020-01-06 07:25:50'),
+(9, 'Botol', 3, '2020-01-06 13:31:36'),
+(10, 'Kaplet', 4, '2020-01-06 13:32:08'),
+(12, 'Tetes', 5, '2020-01-06 13:33:11'),
+(13, 'Injeksi', 6, '2020-01-06 13:33:38');
 
 -- --------------------------------------------------------
 
@@ -147,6 +159,15 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`iduser`, `nama`, `email`, `username`, `password`, `role`, `tglupdate`) VALUES
+(1, 'Khairul kahpi', 'khairul@gagah.com', 'Khairul25', 'c3f9af1c102c611aa4311efe026b59b682d27f24', 'Admin', '2019-12-29 15:11:32'),
+(3, 'Khairul kahpi', 'fiekhairuel@yahoo.com', 'Khairulkahpi', '875c77122788fac514e5e61e45fbf7079c9b003c', 'Admin', '2019-12-30 03:36:28'),
+(4, 'faraby', 'faraby@gmail.com', 'faraby', 'ee2dd584df0902439d757b60d2725b2a26fc2d5c', 'pelanggan', '2020-01-05 17:43:17');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -216,7 +237,7 @@ ALTER TABLE `invoice`
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `idkategori` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idkategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `obat`
@@ -234,7 +255,7 @@ ALTER TABLE `pelanggan`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `iduser` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `iduser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

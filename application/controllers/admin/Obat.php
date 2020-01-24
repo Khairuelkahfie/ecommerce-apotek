@@ -1,148 +1,119 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
+
 class Obat extends CI_Controller
 {
-    // load model
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('Obat_model');
-        $this->load->model('Kategori_model');
+        $this->load->model('Obat_model', 'obat');
     }
-    // data  obat
     public function index()
     {
-        $obat = $this->Obat_model->listing();
-        $data = array(
-            'title' => 'Obat',
-            'obat'  => $obat,
-            'isi'   => 'admin/obat/list'
-        );
-        $this->load->view('admin/layout/wrapper', $data, FALSE);
+        $data['obat'] = $this->Obat_model->tampildata()->result();
+        $this->load->view('template/header');
+        $this->load->view('template/sidebar');
+        $this->load->view('admin/obat', $data);
+        $this->load->view('template/footer');
     }
-    // tambah obat
     public function tambah()
     {
-        // ambil data kategori 
-        $kategori = $this->Kategori_model->listing();
-
-        // validasi input
-        $valid = $this->form_validation;
-        $valid->set_rules(
-            'nama',
-            'Nama Obat',
-            'required',
-            array('required' => '%s harus di isi')
-        );
-        $valid->set_rules(
-            'email',
-            'Email',
-            'required|valid_email',
-            array(
-                'required' => '%s harus di isi',
-                'valid_email' => '%s tidak valid'
-            )
-        );
-        $valid->set_rules(
-            'username',
-            'Obatname',
-            'required|min_length[6]|max_length[32]|is_unique[users.username]',
-            array(
-                'required'          => '%s harus di isi',
-                'min_length'        => '%s minimal 6 karakter',
-                'max_length'        => '%s maksimal 32 karakter',
-                'is_unique'         => '%s sudah Ada. Buat Obatname Baru.'
-            )
-        );
-
-        $valid->set_rules(
-            'password',
-            'Password',
-            'required',
-            array('required' => '%s harus di isi')
-        );
-
-        if ($valid->run() === false) {
-            // end validasi 
-            $data = array(
-                'title' => 'Obat',
-                'kategori' => $kategori,
-                'isi'   => 'admin/obat/tambah'
-            );
-            $this->load->view('admin/layout/wrapper', $data, FALSE);
-            //masuk database 
-        } else {
-            $i = $this->input;
-            $data = array(
-                'nama'      => $i->post('nama'),
-                'email'     => $i->post('email'),
-                'username'  => $i->post('username'),
-                'password'  => SHA1($i->post('password')),
-                'role'      => $i->post('role')
-            );
-            $this->Obat_model->tambah($data);
-            $this->session->set_flashdata('sukses', 'Data Telah Ditambah');
-            redirect(base_url('admin/obat'), 'refresh');
-        }
+        $this->load->view('template/header');
+        $this->load->view('template/sidebar');
+        $this->load->view('admin/formobat');
+        $this->load->view('template/footer');
     }
-    // edit data
-    public function edit($iduser)
+    public function simpan()
     {
-        $obat = $this->Obat_model->detail($iduser);
-        // validasi input
-        $valid = $this->form_validation;
-        $valid->set_rules(
-            'nama',
-            'Nama Lengkap',
-            'required',
-            array('required' => '%s harus di isi')
-        );
-        $valid->set_rules(
-            'email',
-            'Email',
-            'required|valid_email',
-            array(
-                'required' => '%s harus di isi',
-                'valid_email' => '%s tidak valid'
-            )
-        );
-        $valid->set_rules(
-            'password',
-            'Password',
-            'required',
-            array('required' => '%s harus di isi')
-        );
-
-        if ($valid->run() === false) {
-            // end validasi 
-            $data = array(
-                'title' => 'Obat',
-                'obat' => $obat,
-                'isi'   => 'admin/obat/edit'
-            );
-            $this->load->view('admin/layout/wrapper', $data, FALSE);
-            //masuk database 
+        $namaobat   = $this->input->post('namaobat');
+        $keterangan = $this->input->post('keterangan');
+        $kategori   = $this->input->post('kategori');
+        $harga      = $this->input->post('harga');
+        $stock      = $this->input->post('stock');
+        $komposisi  = $this->input->post('komposisi');
+        $indikasi   = $this->input->post('indikasi');
+        //$dosis      = $this->input->post('$dosis');
+        $perhatian  = $this->input->post('perhatian');
+        $gambar     = $_FILES['gambar']['name'];
+        if ($gambar = '') {
         } else {
-            $i = $this->input;
-            $data = array(
-                'iduser'    => $iduser,
-                'nama'      => $i->post('nama'),
-                'email'     => $i->post('email'),
-                'username'  => $i->post('username'),
-                'password'  => SHA1($i->post('password')),
-                'role'      => $i->post('role')
-            );
-            $this->Obat_model->edit($data);
-            $this->session->set_flashdata('sukses', 'Data Telah Diedit');
-            redirect(base_url('admin/obat'), 'refresh');
+            $config['upload_path'] = './assets/img/obat';
+            $config['allowed_types'] = 'jpg|jpeg|png|gif';
+
+            $this->load->library('upload', $config);
+            if (!$this->upload->do_upload('gambar')) {
+                echo "Gambar Gagal diupload";
+            } else {
+                $gambar = $this->upload->data('file_name');
+            }
         }
+        $data = array(
+            'namaobat'      => $namaobat,
+            'keterangan'    => $keterangan,
+            'kategori'      => $kategori,
+            'harga'         => $harga,
+            'stock'         => $stock,
+            'komposisi'     => $komposisi,
+            'indikasi'      => $indikasi,
+            //'dosis'         => $dosis,
+            'perhatian'     => $perhatian,
+            'gambar'        => $gambar
+        );
+        // print_r($data);
+        $this->obat->tambah($data);
+        redirect('admin/obat');
     }
-    // hapus data
-    public function delete($iduser)
+    public function edit($idobat)
     {
-        $data = array('iduser' => $iduser);
-        $this->Obat_model->delete($data);
-        $this->session->set_flashdata('sukses', 'Data Telah Dihapus');
-        redirect(base_url('admin/obat'), 'refresh');
+        $where = array('idobat' => $idobat);
+        $data['obat'] = $this->obat->ubah($where)->result();
+        $this->load->view('template/header');
+        $this->load->view('template/sidebar');
+        $this->load->view('admin/ubah', $data);
+        $this->load->view('template/footer');
+    }
+    public function simpanedit()
+    {
+        $idobat         = $this->input->post('idobat');
+        $namaobat       = $this->input->post('namaobat');
+        $keterangan     = $this->input->post('keterangan');
+        $kategori       = $this->input->post('kategori');
+        $harga          = $this->input->post('harga');
+        $stock          = $this->input->post('stock');
+        $komposisi      = $this->input->post('komposisi');
+        $indikasi       = $this->input->post('indikasi');
+        $perhatian       = $this->input->post('perhatian');
+        $data = array(
+            'namaobat'  => $namaobat,
+            'keterangan'    => $keterangan,
+            'kategori'      => $kategori,
+            'harga'         => $harga,
+            'stock'         => $stock,
+            'komposisi'         => $komposisi,
+            'indikasi'         => $indikasi,
+            'perhatian'         => $perhatian
+        );
+        $where = array(
+            'idobat'    => $idobat
+        );
+        //print_r($data);
+        $this->obat->update($where, $data, 'obat');
+        redirect('admin/obat');
+    }
+
+    public function hapus($id)
+    {
+        $this->_hapusgambar($id);
+        $this->obat->hapus($id);
+        redirect("admin/obat");
+    }
+
+    private function _hapusgambar($id)
+    {
+        $obat = $this->obat->ambilid($id);
+        if ($obat->gambar != "default.png") {
+            $filename = explode(".", $obat->gambar)[0];
+            return array_map('unlink', glob(FCPATH . "asset/img/obat/$filename.*"));
+        }
     }
 }

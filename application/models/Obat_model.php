@@ -1,68 +1,46 @@
 <?php
-defined('BASEPATH') or exit('No direct script access allowed');
 class Obat_model extends CI_Model
 {
-    public function __construct()
+    public $tabel = 'obat';
+    public $id = 'idobat';
+    public $order = 'ASC';
+    public function tampildata()
     {
-        parent::__construct();
-        $this->load->database();
+        return $this->db->get('obat');
     }
-    // listing all Obat
-    public function listing()
-    {
-        $this->db->select('obat.*,
-                            users.nama,
-                            kategori.namaktegori');
-        $this->db->from('obat');
-        // join
-        $this->db->join('users', 'users.iduser = obat.iduser', 'left');
-        $this->db->join('kategori', 'kategori.idkategori = obat.idkategori', 'left');
-        // akhir join
-        $this->db->order_by('idobat', 'asc');
-        $query = $this->db->get();
-        return $query->result();
-    }
-
-    // detail Obat
-    public function detail($idobat)
-    {
-        $this->db->select('*');
-        $this->db->from('obat');
-        $this->db->where('idobat', $idobat);
-        $this->db->order_by('idobat', 'asc');
-        $query = $this->db->get();
-        return $query->row();
-    }
-
-    // login Obat
-    public function login($obatname, $password)
-    {
-        $this->db->select('*');
-        $this->db->from('obat');
-        $this->db->where(array(
-            'obatname' => $obatname,
-            'password' => SHA1($password)
-        ));
-        $this->db->order_by('idobat', 'desc');
-        $query = $this->db->get();
-        return $query->row();
-    }
-
-    // tambah Obat
     public function tambah($data)
     {
-        $this->db->insert('obat', $data);
+        $this->db->insert($this->tabel, $data);
     }
-    // edit Obat
-    public function edit($data)
+    public function ubah($where)
     {
-        $this->db->where('idobat', $data['idobat']);
-        $this->db->update('obat', $data);
+        return $this->db->get_where($this->tabel, $where);
     }
-    // hapus Obat
-    public function delete($data)
+    public function update($where, $data, $tabel)
     {
-        $this->db->where('idobat', $data['idobat']);
-        $this->db->delete('obat', $data);
+        $this->db->where($where);
+        $this->db->update($tabel, $data);
+    }
+
+    public function hapus($idobat)
+    {
+        $this->db->where($this->id, $idobat);
+        $this->db->delete($this->tabel);
+    }
+    public function ambilid($id)
+    {
+        return $this->db->get_where($this->tabel, ["idobat" => $id])->row();
+    }
+
+    public function find($id)
+    {
+        $result = $this->db->where('idobat', $id)
+            ->limit(1)
+            ->get('obat');
+        if ($result->num_rows() > 0) {
+            return $result->row();
+        } else {
+            return array();
+        }
     }
 }

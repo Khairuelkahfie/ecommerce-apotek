@@ -116,4 +116,12 @@ class Obat extends CI_Controller
             return array_map('unlink', glob(FCPATH . "asset/img/obat/$filename.*"));
         }
     }
+    public function detail($idobat)
+    {
+        $data['obat'] = $this->Obat_model->detailobat($idobat);
+        $this->load->view('template/header');
+        $this->load->view('template/sidebar');
+        $this->load->view('admin/detailobat', $data);
+        $this->load->view('template/footer');
+    }
 }

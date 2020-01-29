@@ -26,12 +26,28 @@
                     <i class="fas fa-database"></i>
                     <span>Data Obat</span></a>
             </li>
-            <!-- Tablet -->
+
             <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('admin/invoice') ?> ">
-                    <i class="fas fa-file-invoice"></i>
-                    <span>Invoice</span></a>
+                <a class="nav-link" href="<?= base_url('invoice') ?> ">
+                    <i class="far fa-handshake"></i>
+                    <span>Transaksi</span></a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('invoice') ?> ">
+                    <i class="fas fa-pen-square"></i>
+                    <span>Konsultasi</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('invoice') ?> ">
+                    <i class="fas fa-users"></i>
+                    <span>Pelanggan</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('invoice') ?> ">
+                    <i class="fas fa-list"></i>
+                    <span>Menu</span></a>
+            </li>
+
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">

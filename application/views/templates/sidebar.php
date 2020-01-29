@@ -16,7 +16,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -33,41 +33,41 @@
 
             <!-- kAPSUL -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="">
                     <i class="fas fa-capsules"></i>
                     <span>Kapsul</span></a>
             </li>
             <!-- Tablet -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="">
                     <i class="fas fa-tablets"></i>
                     <span>Tablet</span></a>
             </li>
 
             <!-- Botol  -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="">
                     <i class="fas fa-wine-bottle"></i>
                     <span>Botol</span></a>
             </li>
 
             <!-- Kaplet-->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="">
                     <i class="fas fa-baby"></i>
                     <span>Kaplet</span></a>
             </li>
 
             <!-- Tetes-->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="">
                     <i class="fas fa-fill-drip"></i>
                     <span>Tetes</span></a>
             </li>
 
             <!-- Injeksi-->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="">
                     <i class="fas fa-syringe"></i>
                     <span>Injeksi</span></a>
             </li>

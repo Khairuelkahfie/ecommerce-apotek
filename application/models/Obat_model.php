@@ -43,4 +43,13 @@ class Obat_model extends CI_Model
             return array();
         }
     }
+    public function detailobat($idobat)
+    {
+        $result = $this->db->where('idobat', $idobat)->get('obat');
+        if ($result->num_rows() > 0) {
+            return $result->result();
+        } else {
+            return false;
+        }
+    }
 }

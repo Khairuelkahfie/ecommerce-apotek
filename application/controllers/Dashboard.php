@@ -22,7 +22,7 @@ class Dashboard extends CI_Controller
 
         );
         $this->cart->insert($data);
-        redirect('dashboard');
+        redirect('dashboard/detailkeranjang');
     }
     public function detailkeranjang()
     {
@@ -45,10 +45,23 @@ class Dashboard extends CI_Controller
     }
     public function prosespesanan()
     {
-        $this->cart->destroy();
+        $proses = $this->Invoice_model->index();
+        if ($proses) {
+            $this->cart->destroy();
+            $this->load->view('templates/header');
+            $this->load->view('templates/sidebar');
+            $this->load->view('prosespesanan');
+            $this->load->view('templates/footer');
+        } else {
+            echo "Maaf Pesanan Anda Gagal Di proses";
+        }
+    }
+    public function detail($idobat)
+    {
+        $data['obat'] = $this->Obat_model->detailobat($idobat);
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
-        $this->load->view('prosespesanan');
+        $this->load->view('detailobat', $data);
         $this->load->view('templates/footer');
     }
 }

@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container mt-2 text-center">
     <h4>Keranjang Belanja</h4>
     <table class="table table-borderd table-striped table-hover">
         <tr>

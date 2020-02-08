@@ -1,16 +1,17 @@
 <?php
-defined('BASEPATH') or exit('No direct script access allowed');
+
 
 class Dashboard extends CI_Controller
 {
     public function index()
     {
+        $data['user'] = $this->db->get_where('users', ['email' => $this->session->userdata('email')])->row_array();
         $data['obat'] = $this->Obat_model->tampildata()->result();
-        $this->load->view('templates/header');
-        $this->load->view('templates/sidebar');
-        $this->load->view('dashboard', $data);
-        $this->load->view('templates/footer');
+        $this->load->view('template/header');
+        $this->load->view('halamanutama', $data);
+        $this->load->view('template/footer');
     }
+
     public function tambahkeranjang($id)
     {
         $obat = $this->Obat_model->find($id);
@@ -18,11 +19,11 @@ class Dashboard extends CI_Controller
             'id'      => $obat->idobat,
             'qty'     => 1,
             'price'   => $obat->harga,
-            'name'    => $obat->namaobat
-
+            'name'    => $obat->namaobat,
+            'tgl'    => $obat->tglpesan
         );
         $this->cart->insert($data);
-        redirect('dashboard/detailkeranjang');
+        redirect('dashboard');
     }
     public function detailkeranjang()
     {
@@ -34,7 +35,7 @@ class Dashboard extends CI_Controller
     public function hapuskeranjang()
     {
         $this->cart->destroy();
-        redirect('dashboard/index');
+        redirect('dashboard/detailkeranjang');
     }
     public function pembayaran()
     {

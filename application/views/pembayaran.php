@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid my-3">
     <div class="row">
         <div class="col-md-2">
 
@@ -45,7 +45,7 @@
                         <option value="">BRI - XXXXXXXXX</option>
                     </select>
                 </div>
-                <BUtton type=" submit" class="btn btn-sm btn-primary">Pesan</BUtton>
+                <BUtton type=" submit" class="btn btn-sm btn-primary ">Pesan</BUtton>
             </form>
         <?php
                 } else {
@@ -53,10 +53,6 @@
                 }
 
         ?>
-        </div>
-
-        <div class="col-md-2">
-
         </div>
     </div>
 </div>

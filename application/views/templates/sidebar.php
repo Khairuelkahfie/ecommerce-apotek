@@ -1,175 +1,99 @@
-<body id="page-top">
-
-    <!-- Page Wrapper -->
-    <div id="wrapper">
-
-        <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-text mx-3">Alodie Farma</div>
-            </a>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Kategori
-            </div>
-
-
-
-            <!-- kAPSUL -->
-            <li class="nav-item">
-                <a class="nav-link" href="">
-                    <i class="fas fa-capsules"></i>
-                    <span>Kapsul</span></a>
-            </li>
-            <!-- Tablet -->
-            <li class="nav-item">
-                <a class="nav-link" href="">
-                    <i class="fas fa-tablets"></i>
-                    <span>Tablet</span></a>
-            </li>
-
-            <!-- Botol  -->
-            <li class="nav-item">
-                <a class="nav-link" href="">
-                    <i class="fas fa-wine-bottle"></i>
-                    <span>Botol</span></a>
-            </li>
-
-            <!-- Kaplet-->
-            <li class="nav-item">
-                <a class="nav-link" href="">
-                    <i class="fas fa-baby"></i>
-                    <span>Kaplet</span></a>
-            </li>
-
-            <!-- Tetes-->
-            <li class="nav-item">
-                <a class="nav-link" href="">
-                    <i class="fas fa-fill-drip"></i>
-                    <span>Tetes</span></a>
-            </li>
-
-            <!-- Injeksi-->
-            <li class="nav-item">
-                <a class="nav-link" href="">
-                    <i class="fas fa-syringe"></i>
-                    <span>Injeksi</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-
-        </ul>
-        <!-- End of Sidebar -->
-
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
-
-            <!-- Main Content -->
-            <div id="content">
-
-                <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
-                    </button>
-
-                    <!-- Topbar Search -->
-                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
+<div id="content-wrapper">
+    <!-- Main Content -->
+    <div id="content">
+        <!-- Topbar -->
+        <nav class="navbar navbar-expand-md navbar-light bg-white topbar static-top ">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <img src="<?= base_url('assets/img/') ?>Logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                    Alodie Farma
+                </a>
+                <!-- Topbar Search -->
+                <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-5 my-2 my-md-0 mw-100 navbar-search">
+                    <div class="input-group">
+                        <input type="text" class="form-control bg-light border-0 small" placeholder="Silahkan Anda Mencari ...!" aria-label="Search" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button">
+                                <i class="fas fa-search fa-sm"></i>
+                            </button>
                         </div>
-                    </form>
+                    </div>
+                </form>
+                <!-- Topbar Navbar -->
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown no-arrow mx-1">
+                        <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-shopping-cart fa-fw"></i>
+                            <!-- Counter - Alerts -->
+                            <?php $keranjang = $this->cart->total_items() ?>
+                            <span class="badge badge-danger badge-counter"><?= $keranjang ?></span>
+                        </a>
+                        <!-- Dropdown - Alerts -->
+                        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
+                            <h6 class="dropdown-header">
+                                Daftar Belanja
+                            </h6>
+                            <?php
+                            $no = 1;
+                            foreach ($this->cart->contents() as $items) :
+                            ?>
+                                <div class="">
+                                    <a class="dropdown-item d-flex align-items-center" href="#">
+                                        <span class="font-weight-bold"><?= $items['name'] ?></span>
+                                    </a>
+                                </div>
 
-                    <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
 
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
+                            <?php endforeach; ?>
 
-                        <div class="navbar">
-                            <ul class="nav navbar-nav navbar-right">
-                                <li>
-                                    <?php $keranjang = 'Keranjang:' . $this->cart->total_items() ?>
-                                    <?= anchor('dashboard/detailkeranjang', $keranjang)  ?>
-                                </li>
-                            </ul>
                         </div>
-                        <div class="topbar-divider d-none d-sm-block"></div>
-                        <!-- Nav Item - User Information -->
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
-                                <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
-                            </a>
-                            <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
+                    </li>
+                    <!-- Menu Login DAN DAFTAR-->
+                    <li class="nav-item dropdown no-arrow my-2 mx-">
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item m-2">
+                                <a class="btn btn-outline-primary" href="">
+                                    <span class="text">Login</span>
                                 </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
+                            </li>
+                            <li class="nav-item m-2">
+                                <a href="" class="btn btn-outline-primary">
+                                    <span class="icon">
+                                        <span class="text">
+                                            Daftar
+                                        </span>
+                                    </span>
                                 </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
-                                </a>
-                            </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- End of Topbar -->
+        <!-- menu -->
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top">
+            <div class="container">
+                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item active">
+                            <a class="nav-link menu" href="<?= base_url('dashboard') ?>">Home<span class="sr-only">(current)</span></a>
                         </li>
-
+                        <li class="nav-item active">
+                            <a class="nav-link menu" href="">Obat<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link menu" href="<?= base_url('dashboard/detailkeranjang') ?>">Keranjang <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link menu" href="">Konsultasi<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link menu" href="">About<span class="sr-only">(current)</span></a>
+                        </li>
                     </ul>
-
-                </nav>
-                <!-- End of Topbar -->
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
